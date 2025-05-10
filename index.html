@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Auto Redirect URL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      width: 80%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>अपना लिंक दर्ज करें</h2>
+  <input type="url" id="urlInput" placeholder="https://example.com" required>
+  <br>
+  <button onclick="openURL()">लिंक खोलें</button>
+
+  <script>
+    function openURL() {
+      const url = document.getElementById('urlInput').value;
+      if (!url) {
+        alert('कृपया एक वैध URL दर्ज करें');
+        return;
+      }
+
+      // Open URL in a new tab
+      const newWindow = window.open(url, '_blank');
+
+      // Wait 30-40 seconds and redirect back
+      setTimeout(() => {
+        if (newWindow) {
+          newWindow.close(); // Close the opened tab if popup allowed
+        }
+        window.location.href = window.location.href; // Reload current page
+      }, 35000); // 35 seconds
+    }
+  </script>
+
+</body>
+</html>
